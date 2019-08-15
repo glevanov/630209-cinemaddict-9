@@ -1,12 +1,59 @@
+import getRandomInteger from '../getRandomInteger';
+
 /**
  * Returns Main Navigation element markup
  * @return {string} element markup
  */
-export const getMainNavigation = () => `
-<nav class="main-navigation">
-  <a href="#all" class="main-navigation__item main-navigation__item--active">All movies</a>
-  <a href="#watchlist" class="main-navigation__item">Watchlist <span class="main-navigation__item-count">13</span></a>
-  <a href="#history" class="main-navigation__item">History <span class="main-navigation__item-count">4</span></a>
-  <a href="#favorites" class="main-navigation__item">Favorites <span class="main-navigation__item-count">8</span></a>
-  <a href="#stats" class="main-navigation__item main-navigation__item--additional">Stats</a>
-</nav>`;
+export const getMainNavigation = () => {
+  const navigationData = [
+    {
+      id: `all`,
+      title: `All movies`,
+      isActive: true,
+      isAdditional: false,
+      hasCount: false,
+    },
+    {
+      id: `watchlist`,
+      title: `Watchlist`,
+      isActive: false,
+      isAdditional: false,
+      hasCount: true,
+    },
+    {
+      id: `history`,
+      title: `History`,
+      isActive: false,
+      isAdditional: false,
+      hasCount: true,
+    },
+    {
+      id: `favorites`,
+      title: `Favorites`,
+      isActive: false,
+      isAdditional: false,
+      hasCount: true,
+    },
+    {
+      id: `stats`,
+      title: `Stats`,
+      isActive: false,
+      isAdditional: true,
+      hasCount: false,
+    },
+  ];
+
+  const navigationItems = navigationData.map((item) => `
+    <a
+      href="#${item.id}"
+      class="main-navigation__item ${(item.isActive) ? `main-navigation__item--active` : ``} ${(item.isAdditional) ? `main-navigation__item--additional` : ``}"
+    >
+      ${item.title}${(item.hasCount) ? ` <span class="main-navigation__item-count">${getRandomInteger(1, 13)}</span>` : ``}
+    </a>
+  `);
+
+  return `
+  <nav class="main-navigation">
+    ${navigationItems.join(``)}
+  </nav>`;
+};
