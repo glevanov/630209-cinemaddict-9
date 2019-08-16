@@ -1,7 +1,6 @@
 import {getSearch} from './components/Search';
-import {getHeaderProfile} from './components/HeaderProfile';
-import {getMainNavigation} from './components/MainNavigation';
-import {getSort} from './components/Sort';
+import {getProfile} from './components/Profile';
+import {getMenu} from './components/Menu';
 import {getFilmsSection} from './components/FilmsSection';
 
 /**
@@ -18,10 +17,9 @@ const mainElement = document.querySelector(`.main`);
 
 render(headerElement, `
   ${getSearch()}
-  ${getHeaderProfile()}
-  `);
+  ${getProfile()}
+`);
 render(mainElement, `
-  ${getMainNavigation()}
-  ${getSort()}
+  ${getMenu()}
   ${getFilmsSection()}
-  `);
+`);

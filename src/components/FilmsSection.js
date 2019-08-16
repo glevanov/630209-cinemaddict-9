@@ -1,5 +1,44 @@
-import {getFilmsList} from './FilmsList';
-import {getFilmsListExtra} from './FilmsListExtra';
+import {getFilmCard} from './FilmCard';
+import {getShowMore} from './ShowMore';
+
+/**
+ * Returns Films section element markup
+ * @param {array} films Films objects
+ * @return {string} element markup
+ */
+export const getFilmsList = (films) => {
+  const filmElements = films.map((film) => getFilmCard(film));
+
+  return `
+  <section class="films-list">
+    <h2 class="films-list__title visually-hidden">All movies. Upcoming</h2>
+
+    <div class="films-list__container">
+      ${filmElements.join(``)}
+    </div>
+
+    ${getShowMore()}
+  </section>`;
+};
+
+/**
+ * Returns Extra Films section element markup
+ * @param {array} films Films objects
+ * @param {string} title Section title
+ * @return {string} element markup
+ */
+export const getFilmsListExtra = (films, title) => {
+  const filmElements = films.map((film) => getFilmCard(film));
+
+  return `
+  <section class="films-list--extra">
+    <h2 class="films-list__title">${title}</h2>
+
+    <div class="films-list__container">
+      ${filmElements.join(``)}
+    </div>
+  </section>`;
+};
 
 /**
  * Returns Films section element markup

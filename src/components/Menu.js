@@ -1,10 +1,41 @@
 import getRandomInteger from '../getRandomInteger';
 
 /**
- * Returns Main Navigation element markup
+ * Returns Sort element markup
  * @return {string} element markup
  */
-export const getMainNavigation = () => {
+export const getSort = () => {
+  const sortTypes = [
+    {
+      title: `Sort by default`,
+      isActive: true,
+    },
+    {
+      title: `Sort by date`,
+      isActive: false,
+    },
+    {
+      title: `Sort by rating`,
+      isActive: false,
+    },
+  ];
+
+  const sortItems = sortTypes.map((item) => `
+    <li><a href="#" class="sort__button ${(item.isActive) ? `sort__button--active` : ``}">${item.title}</a></li>
+  `);
+
+  return `
+  <ul class="sort">
+    ${sortItems.join(``)}
+  </ul>`;
+};
+
+
+/**
+ * Returns Statistic element markup
+ * @return {string} element markup
+ */
+const getStatistic = () => {
   const navigationData = [
     {
       id: `all`,
@@ -57,3 +88,12 @@ export const getMainNavigation = () => {
     ${navigationItems.join(``)}
   </nav>`;
 };
+
+/**
+ * Returns Menu element markup
+ * @return {string} element markup
+ */
+export const getMenu = () => `
+  ${getStatistic()}
+  ${getSort()}
+`;
