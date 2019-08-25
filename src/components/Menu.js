@@ -1,4 +1,4 @@
-import getRandomInteger from '../getRandomInteger';
+import {getRandomInteger} from '../mockHelpers';
 
 /**
  * Returns Sort element markup

@@ -1,36 +1,26 @@
 /**
  * Returns Popup element markup
  * @param {object} film Object
+ * @param {array} comments Array
  * @return {string} element markup
  */
-export const getPopup = (film) => {
-  const comments = [
-    {
-      emoji: `smile`,
-      text: `Interesting setting and a good cast`,
-      author: `Tim Macoveev`,
-      days: `3 days ago`,
-    },
-    {
-      emoji: `sleeping`,
-      text: `Booooooooooring`,
-      author: `John Doe`,
-      days: `2 days ago`,
-    },
-    {
-      emoji: `puke`,
-      text: `Very very old. Meh`,
-      author: `John Doe`,
-      days: `2 days ago`,
-    },
-    {
-      emoji: `angry`,
-      text: `Almost two hours? Seriously?`,
-      author: `John Doe`,
-      days: `Today`,
-    },
-  ];
-
+export const getPopup = ({
+  title,
+  titleOriginal,
+  posterURL,
+  ageRestriction,
+  rating,
+  director,
+  writers,
+  actors,
+  releaseDate,
+  duration,
+  country,
+  genres,
+  description,
+},
+comments
+) => {
   const commentsItems = comments.map((comment) => `
   <li class="film-details__comment">
     <span class="film-details__comment-emoji">
@@ -56,52 +46,52 @@ export const getPopup = (film) => {
         </div>
         <div class="film-details__info-wrap">
           <div class="film-details__poster">
-            <img class="film-details__poster-img" src="${film.posterURL}" alt="">
+            <img class="film-details__poster-img" src="${posterURL}" alt="">
   
-            <p class="film-details__age">${film.ageRestriction}</p>
+            <p class="film-details__age">${ageRestriction}</p>
           </div>
   
           <div class="film-details__info">
             <div class="film-details__info-head">
               <div class="film-details__title-wrap">
-                <h3 class="film-details__title">${film.title}</h3>
-                <p class="film-details__title-original">${film.titleOriginal}</p>
+                <h3 class="film-details__title">${title}</h3>
+                <p class="film-details__title-original">${titleOriginal}</p>
               </div>
   
               <div class="film-details__rating">
-                <p class="film-details__total-rating">${film.rating}</p>
+                <p class="film-details__total-rating">${rating}</p>
               </div>
             </div>
   
             <table class="film-details__table">
               <tr class="film-details__row">
                 <td class="film-details__term">Director</td>
-                <td class="film-details__cell">${film.director}</td>
+                <td class="film-details__cell">${director}</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Writers</td>
-                <td class="film-details__cell">${film.writers}</td>
+                <td class="film-details__cell">${writers.join(`, `)}</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Actors</td>
-                <td class="film-details__cell">${film.actors}</td>
+                <td class="film-details__cell">${actors.join(`, `)}</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Release Date</td>
-                <td class="film-details__cell">${film.releaseDate}</td>
+                <td class="film-details__cell">${releaseDate}</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Runtime</td>
-                <td class="film-details__cell">${film.duration}</td>
+                <td class="film-details__cell">${duration}</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Country</td>
-                <td class="film-details__cell">${film.country}</td>
+                <td class="film-details__cell">${country}</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Genres</td>
                 <td class="film-details__cell">
-                  ${film.genres.map((item) => `
+                  ${genres.map((item) => `
                     <span class="film-details__genre">${item}</span>
                   `.join(``))}
                 </td>
@@ -109,7 +99,7 @@ export const getPopup = (film) => {
             </table>
   
             <p class="film-details__film-description">
-              ${film.description}
+              ${description}
             </p>
           </div>
         </div>
@@ -128,7 +118,7 @@ export const getPopup = (film) => {
   
       <div class="form-details__bottom-container">
         <section class="film-details__comments-wrap">
-          <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${film.commentsCount}</span></h3>
+          <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${comments.length}</span></h3>
   
           <ul class="film-details__comments-list">
             ${commentsItems.join(``)}
