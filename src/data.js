@@ -82,11 +82,9 @@ export const getFilm = () => ({
   ]),
   description: getRandomParagraph(getRandomInteger(1, 3)),
   commentsCount: getRandomInteger(1, 4),
-  activeControls: {
-    watchlist: getRandomBoolean(),
-    watched: getRandomBoolean(),
-    favorite: getRandomBoolean(),
-  },
+  isOnWatchlist: getRandomBoolean(),
+  isWatched: getRandomBoolean(),
+  isFavorite: getRandomBoolean(),
   id: getRandomInteger(1, Number.MAX_SAFE_INTEGER),
 });
 

@@ -12,7 +12,9 @@ export const getFilmCard = ({
   posterURL,
   description,
   commentsCount,
-  activeControls,
+  isOnWatchlist,
+  isWatched,
+  isFavorite,
 }) => `
 <article class="film-card">
   <h3 class="film-card__title">${title}</h3>
@@ -20,14 +22,14 @@ export const getFilmCard = ({
   <p class="film-card__info">
     <span class="film-card__year">${year}</span>
     <span class="film-card__duration">${duration}</span>
-    <span class="film-card__genre">${genres[0]}</span>
+    <span class="film-card__genre">${Array.from(genres)[0]}</span>
   </p>
   <img src="${posterURL}" alt="" class="film-card__poster">
   <p class="film-card__description">${description}</p>
   <a class="film-card__comments">${commentsCount} comments</a>
   <form class="film-card__controls">
-    <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist ${(activeControls.watchlist) ? `film-card__controls-item--active` : ``}">Add to watchlist</button>
-    <button class="film-card__controls-item button film-card__controls-item--mark-as-watched ${(activeControls.watched) ? `film-card__controls-item--active` : ``}">Mark as watched</button>
-    <button class="film-card__controls-item button film-card__controls-item--favorite ${(activeControls.favorite) ? `film-card__controls-item--active` : ``}">Mark as favorite</button>
+    <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist ${(isOnWatchlist) ? `film-card__controls-item--active` : ``}">Add to watchlist</button>
+    <button class="film-card__controls-item button film-card__controls-item--mark-as-watched ${(isWatched) ? `film-card__controls-item--active` : ``}">Mark as watched</button>
+    <button class="film-card__controls-item button film-card__controls-item--favorite ${(isFavorite) ? `film-card__controls-item--active` : ``}">Mark as favorite</button>
   </form>
 </article>`;

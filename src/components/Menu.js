@@ -1,4 +1,4 @@
-import {getRandomInteger} from '../mockHelpers';
+import {films} from '../data';
 
 /**
  * Returns Sort element markup
@@ -30,6 +30,18 @@ export const getSort = () => {
   </ul>`;
 };
 
+/**
+ * Returns Films section element markup
+ * @param {array} items List of films
+ * @param {string} key Key to check if true or false
+ * @return {number} result
+ */
+const countByKey = (items, key) => items.reduce((acc, film) => {
+  if (film[key]) {
+    acc++;
+  }
+  return acc;
+}, 0);
 
 /**
  * Returns Statistic element markup
@@ -42,35 +54,33 @@ const getStatistic = () => {
       title: `All movies`,
       isActive: true,
       isAdditional: false,
-      hasCount: false,
     },
     {
       id: `watchlist`,
       title: `Watchlist`,
       isActive: false,
       isAdditional: false,
-      hasCount: true,
+      counter: countByKey(films, `isOnWatchlist`),
     },
     {
       id: `history`,
       title: `History`,
       isActive: false,
       isAdditional: false,
-      hasCount: true,
+      counter: countByKey(films, `isWatched`),
     },
     {
       id: `favorites`,
       title: `Favorites`,
       isActive: false,
       isAdditional: false,
-      hasCount: true,
+      counter: countByKey(films, `isFavorite`),
     },
     {
       id: `stats`,
       title: `Stats`,
       isActive: false,
       isAdditional: true,
-      hasCount: false,
     },
   ];
 
@@ -79,7 +89,7 @@ const getStatistic = () => {
       href="#${item.id}"
       class="main-navigation__item ${(item.isActive) ? `main-navigation__item--active` : ``} ${(item.isAdditional) ? `main-navigation__item--additional` : ``}"
     >
-      ${item.title}${(item.hasCount) ? ` <span class="main-navigation__item-count">${getRandomInteger(1, 13)}</span>` : ``}
+      ${item.title}${(item.counter) ? ` <span class="main-navigation__item-count">${item.counter}</span>` : ``}
     </a>
   `);
 
