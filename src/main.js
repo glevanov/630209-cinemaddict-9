@@ -2,6 +2,8 @@ import {getSearch} from './components/Search';
 import {getProfile} from './components/Profile';
 import {getMenu} from './components/Menu';
 import {getFilmsSection} from './components/FilmsSection';
+import countByKey from './countByKey';
+import {films} from './data';
 
 /**
  * Renders markup inside the target container
@@ -17,7 +19,7 @@ const mainElement = document.querySelector(`.main`);
 
 render(headerElement, `
   ${getSearch()}
-  ${getProfile()}
+  ${getProfile(countByKey(films, `isWatched`))}
 `);
 render(mainElement, `
   ${getMenu()}
