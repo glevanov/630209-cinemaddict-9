@@ -1,21 +1,15 @@
+import render from './render';
 import {getSearch} from './components/Search';
 import {getProfile} from './components/Profile';
 import {getMenu} from './components/Menu';
 import {getFilmsSection} from './components/FilmsSection';
 import countByKey from './countByKey';
 import {films} from './data';
-
-/**
- * Renders markup inside the target container
- * @param {Node} container
- * @param {string} markup
- */
-const render = (container, markup) => {
-  container.insertAdjacentHTML(`beforeend`, markup);
-};
+import {getStatistics} from "./components/Statistics";
 
 const headerElement = document.querySelector(`.header`);
 const mainElement = document.querySelector(`.main`);
+const statisticsElement = document.querySelector(`.footer__statistics`);
 
 render(headerElement, `
   ${getSearch()}
@@ -25,3 +19,4 @@ render(mainElement, `
   ${getMenu()}
   ${getFilmsSection()}
 `);
+render(statisticsElement, getStatistics(films));
