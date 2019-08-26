@@ -3,6 +3,13 @@ import {getShowMore} from './ShowMore';
 import {films} from '../data';
 
 /**
+ * Max number of films to display per render
+ * @constant
+ * @type {number}
+ */
+export const MAX_FILMS_PER_RENDER = 5;
+
+/**
  * Returns Films section element markup
  * @param {array} items Films objects
  * @return {string} element markup
@@ -18,7 +25,7 @@ export const getFilmsList = (items) => {
       ${filmElements.join(``)}
     </div>
 
-    ${getShowMore()}
+    ${(films.length <= MAX_FILMS_PER_RENDER) ? `` : `${getShowMore()}`}
   </section>`;
 };
 
@@ -48,7 +55,7 @@ export const getFilmsListExtra = (items, title) => {
 export const getFilmsSection = () => {
   return `
   <section class="films">
-    ${getFilmsList(films)}
+    ${getFilmsList(films.slice(0, MAX_FILMS_PER_RENDER))}
     ${getFilmsListExtra(films.slice(0, 2), `Top rated`)}
     ${getFilmsListExtra(films.slice(0, 2), `Most commented`)}
   </section>`;
