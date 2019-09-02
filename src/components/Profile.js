@@ -1,7 +1,7 @@
 /**
  * Returns user rating based on number of watched films
  * @param {number} watchedFilmsCount Number of watched films
- * @return {string} user rating
+ * @return {string}
  */
 const getRating = (watchedFilmsCount) => {
   if (watchedFilmsCount === 0) {
@@ -19,7 +19,7 @@ const getRating = (watchedFilmsCount) => {
 /**
  * Returns Header Profile element markup
  * @param {number} watchedFilmsCount Number of watched films
- * @return {string} element markup
+ * @return {string}
  */
 export const getProfile = (watchedFilmsCount) => `
 <section class="header__profile profile">

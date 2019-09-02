@@ -5,7 +5,7 @@ import {MAX_FILMS_PER_RENDER} from './FilmsSection';
 
 /**
  * Returns Show More button element markup
- * @return {string} element markup
+ * @return {string}
  */
 export const getShowMore = () => `
   <button class="films-list__show-more">

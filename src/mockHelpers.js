@@ -1,4 +1,61 @@
 /**
+ * @constant
+ * @type {array}
+ */
+const MOCK_SENTENCES = [
+  `Lorem ipsum dolor sit amet, consectetur adipiscing elit`,
+  `Cras aliquet varius magna, non porta ligula feugiat eget`,
+  `Fusce tristique felis at fermentum pharetra`,
+  `Aliquam id orci ut lectus varius viverra`,
+  `Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante`,
+  `Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum`,
+  `Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui`,
+  `Sed sed nisi sed augue convallis suscipit in sed felis`,
+  `Aliquam erat volutpat`,
+  `Nunc fermentum tortor ac porta dapibus`,
+  `In rutrum ac purus sit amet tempus`
+];
+
+/**
+ * @constant
+ * @type {array}
+ */
+const MOCK_NAMES = [
+  `Trevor Rodgers`,
+  `Johnny Marshall`,
+  `Garry Tyler`,
+  `Shannon Vasquez`,
+  `Tomas Fisher`,
+  `Sherman Huff`,
+  `Otis Hodges`,
+  `Claudia Thompson`,
+  `Ross Garcia`,
+  `Genevieve Park`,
+];
+
+/**
+ * @constant
+ * @type {array}
+ */
+const MOCK_EMOJIS = [
+  `smile`,
+  `sleeping`,
+  `puke`,
+  `angry`,
+];
+
+/**
+ * @constant
+ * @type {array}
+ */
+const MOCK_AUTHORS = [
+  `Tim Macoveev`,
+  `John Doe`,
+  `Sarah Dresdner`,
+  `Kate ♡`
+];
+
+/**
  * Returns random integer
  * @param {number} min Minimum integer
  * @param {number} max Maximum integer
@@ -15,7 +72,7 @@ export const getRandomInteger = (min, max) => {
  * @return {string}
  */
 export const getRandomParagraph = (length) => {
-  const array = Array(length).fill(``).map(getSentence);
+  const array = [...Array(length)].map(getSentence);
   return `${array.join(`. `)}.`;
 };
 
@@ -23,38 +80,16 @@ export const getRandomParagraph = (length) => {
  * Picks and returns a random sentence from list
  * @return {string}
  */
-const getSentence = () => [
-  `Lorem ipsum dolor sit amet, consectetur adipiscing elit`,
-  `Cras aliquet varius magna, non porta ligula feugiat eget`,
-  `Fusce tristique felis at fermentum pharetra`,
-  `Aliquam id orci ut lectus varius viverra`,
-  `Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante`,
-  `Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum`,
-  `Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui`,
-  `Sed sed nisi sed augue convallis suscipit in sed felis`,
-  `Aliquam erat volutpat`,
-  `Nunc fermentum tortor ac porta dapibus`,
-  `In rutrum ac purus sit amet tempus`
-][getRandomInteger(0, 10)];
+const getSentence = () => MOCK_SENTENCES[getRandomInteger(0, MOCK_SENTENCES.length - 1)];
 
 /**
  * Return a mock comment
  * @return {object}
  */
 export const getComment = () => ({
-  emoji: [
-    `smile`,
-    `sleeping`,
-    `puke`,
-    `angry`,
-  ][getRandomInteger(0, 3)],
+  emoji: MOCK_EMOJIS[getRandomInteger(0, MOCK_EMOJIS.length - 1)],
   text: getSentence(),
-  author: [
-    `Tim Macoveev`,
-    `John Doe`,
-    `Sarah Dresdner`,
-    `Kate ♡`
-  ][getRandomInteger(0, 3)],
+  author: MOCK_AUTHORS[getRandomInteger(0, MOCK_AUTHORS.length - 1)],
   days: `${getRandomInteger(1, 7)} days ago`,
 });
 
@@ -62,18 +97,7 @@ export const getComment = () => ({
  * Return a name
  * @return {object}
  */
-export const getName = () => [
-  `Trevor Rodgers`,
-  `Johnny Marshall`,
-  `Garry Tyler`,
-  `Shannon Vasquez`,
-  `Tomas Fisher`,
-  `Sherman Huff`,
-  `Otis Hodges`,
-  `Claudia Thompson`,
-  `Ross Garcia`,
-  `Genevieve Park`,
-][getRandomInteger(0, 9)];
+export const getName = () => MOCK_NAMES[getRandomInteger(0, MOCK_NAMES.length - 1)];
 
 /**
  * Returns random boolean
@@ -88,5 +112,5 @@ export const getRandomBoolean = () => Boolean(Math.round(Math.random()));
  */
 export const getComments = (id) => ({
   id,
-  comments: Array(getRandomInteger(1, 4)).fill(``).map(getComment),
+  comments: [...Array(getRandomInteger(1, 4))].map(getComment),
 });

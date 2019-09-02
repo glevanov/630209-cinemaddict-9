@@ -2,25 +2,9 @@
  * Returns Popup element markup
  * @param {object} film Object
  * @param {array} comments Array
- * @return {string} element markup
+ * @return {string}
  */
-export const getPopup = ({
-  title,
-  titleOriginal,
-  posterURL,
-  ageRestriction,
-  rating,
-  director,
-  writers,
-  actors,
-  releaseDate,
-  duration,
-  country,
-  genres,
-  description,
-},
-comments
-) => {
+export const getPopup = (film, comments) => {
   const commentsItems = comments.map((comment) => `
   <li class="film-details__comment">
     <span class="film-details__comment-emoji">
@@ -46,52 +30,52 @@ comments
         </div>
         <div class="film-details__info-wrap">
           <div class="film-details__poster">
-            <img class="film-details__poster-img" src="${posterURL}" alt="">
+            <img class="film-details__poster-img" src="${film.posterURL}" alt="">
   
-            <p class="film-details__age">${ageRestriction}</p>
+            <p class="film-details__age">${film.ageRestriction}</p>
           </div>
   
           <div class="film-details__info">
             <div class="film-details__info-head">
               <div class="film-details__title-wrap">
-                <h3 class="film-details__title">${title}</h3>
-                <p class="film-details__title-original">${titleOriginal}</p>
+                <h3 class="film-details__title">${film.title}</h3>
+                <p class="film-details__title-original">${film.titleOriginal}</p>
               </div>
   
               <div class="film-details__rating">
-                <p class="film-details__total-rating">${rating}</p>
+                <p class="film-details__total-rating">${film.rating}</p>
               </div>
             </div>
   
             <table class="film-details__table">
               <tr class="film-details__row">
                 <td class="film-details__term">Director</td>
-                <td class="film-details__cell">${director}</td>
+                <td class="film-details__cell">${film.director}</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Writers</td>
-                <td class="film-details__cell">${writers.join(`, `)}</td>
+                <td class="film-details__cell">${film.writers.join(`, `)}</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Actors</td>
-                <td class="film-details__cell">${actors.join(`, `)}</td>
+                <td class="film-details__cell">${film.actors.join(`, `)}</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Release Date</td>
-                <td class="film-details__cell">${releaseDate}</td>
+                <td class="film-details__cell">${film.releaseDate}</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Runtime</td>
-                <td class="film-details__cell">${duration}</td>
+                <td class="film-details__cell">${film.duration}</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Country</td>
-                <td class="film-details__cell">${country}</td>
+                <td class="film-details__cell">${film.country}</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Genres</td>
                 <td class="film-details__cell">
-                  ${genres.map((item) => `
+                  ${film.genres.map((item) => `
                     <span class="film-details__genre">${item}</span>
                   `.join(``))}
                 </td>
@@ -99,7 +83,7 @@ comments
             </table>
   
             <p class="film-details__film-description">
-              ${description}
+              ${film.description}
             </p>
           </div>
         </div>

@@ -1,6 +1,6 @@
 /**
  * Returns Search element markup
- * @return {string} element markup
+ * @return {string}
  */
 export const getSearch = () => `
 <form class="header__search search">
