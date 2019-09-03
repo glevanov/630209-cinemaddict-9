@@ -1,8 +1,8 @@
-import getRandomInteger from '../getRandomInteger';
+import countByID from '../countByID';
 
 /**
  * Returns Sort element markup
- * @return {string} element markup
+ * @return {string}
  */
 export const getSort = () => {
   const sortTypes = [
@@ -30,70 +30,94 @@ export const getSort = () => {
   </ul>`;
 };
 
-
 /**
  * Returns Statistic element markup
- * @return {string} element markup
+ * @return {string}
  */
 const getStatistic = () => {
-  const navigationData = [
-    {
-      id: `all`,
-      title: `All movies`,
-      isActive: true,
-      isAdditional: false,
-      hasCount: false,
-    },
-    {
-      id: `watchlist`,
-      title: `Watchlist`,
-      isActive: false,
-      isAdditional: false,
-      hasCount: true,
-    },
-    {
-      id: `history`,
-      title: `History`,
-      isActive: false,
-      isAdditional: false,
-      hasCount: true,
-    },
-    {
-      id: `favorites`,
-      title: `Favorites`,
-      isActive: false,
-      isAdditional: false,
-      hasCount: true,
-    },
-    {
-      id: `stats`,
-      title: `Stats`,
-      isActive: false,
-      isAdditional: true,
-      hasCount: false,
-    },
-  ];
-
-  const navigationItems = navigationData.map((item) => `
+  const navigationMarkup = getNavigationItems(navigationIDs).map((item) => `
     <a
       href="#${item.id}"
       class="main-navigation__item ${(item.isActive) ? `main-navigation__item--active` : ``} ${(item.isAdditional) ? `main-navigation__item--additional` : ``}"
     >
-      ${item.title}${(item.hasCount) ? ` <span class="main-navigation__item-count">${getRandomInteger(1, 13)}</span>` : ``}
+      ${item.title}${(item.counter) ? ` <span class="main-navigation__item-count">${item.counter}</span>` : ``}
     </a>
   `);
 
   return `
   <nav class="main-navigation">
-    ${navigationItems.join(``)}
+    ${navigationMarkup.join(``)}
   </nav>`;
 };
 
 /**
  * Returns Menu element markup
- * @return {string} element markup
+ * @return {string}
  */
 export const getMenu = () => `
   ${getStatistic()}
   ${getSort()}
 `;
+
+/**
+ * Returns a navigation item
+ * @param {string} id
+ * @return {object}
+ */
+const getNavigationItem = (id) => {
+  const item = {
+    id,
+    title: navigationData[id].title,
+    isActive: navigationData[id].isActive,
+    isAdditional: navigationData[id].isAdditional,
+  };
+  const counter = countByID(id);
+  if (counter) {
+    item.counter = counter;
+  }
+  return item;
+};
+
+/**
+ * Transforms navigation data to navigation items array
+ * @param {array} IDs
+ * @return {array}
+ */
+const getNavigationItems = (IDs) => {
+  if (!IDs.length) {
+    return [];
+  }
+  let acc = [];
+  IDs.forEach((id) => acc.push(getNavigationItem(id)));
+  return acc;
+};
+
+const navigationData = {
+  all: {
+    title: `All movies`,
+    isActive: true,
+    isAdditional: false,
+  },
+  watchlist: {
+    title: `Watchlist`,
+    isActive: false,
+    isAdditional: false,
+  },
+  history: {
+    title: `History`,
+    isActive: false,
+    isAdditional: false,
+  },
+  favorites: {
+    title: `Favorites`,
+    isActive: false,
+    isAdditional: false,
+  },
+  stats: {
+    title: `Stats`,
+    isActive: false,
+    isAdditional: true,
+  },
+};
+
+const navigationIDs = Object.keys(navigationData);
