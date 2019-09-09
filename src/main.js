@@ -65,6 +65,18 @@ const renderFilm = (target, film) => {
       hasOpenPopup = false;
     });
 
+  popup.getElement()
+    .querySelector(`.film-details__comment-input`)
+    .addEventListener(`focus`, () => {
+      document.removeEventListener(`keydown`, handleEscKeyDown);
+    });
+
+  popup.getElement()
+    .querySelector(`.film-details__comment-input`)
+    .addEventListener(`blur`, () => {
+      document.addEventListener(`keydown`, handleEscKeyDown);
+    });
+
   render(target, card.getElement());
 };
 
