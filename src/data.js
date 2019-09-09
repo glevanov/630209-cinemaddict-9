@@ -130,7 +130,6 @@ export const getFilm = () => ({
     `Fantasy`,
   ]),
   description: getRandomParagraph(getRandomInteger(1, 3)),
-  commentsCount: getRandomInteger(1, 4),
   isOnWatchlist: getRandomBoolean(),
   isWatched: getRandomBoolean(),
   isFavorite: getRandomBoolean(),

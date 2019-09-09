@@ -10,6 +10,7 @@ export default class FilmCard {
    */
   constructor(props) {
     this._film = props.film;
+    this._commentsCount = props._commentsCount;
     this._element = null;
   }
 
@@ -45,7 +46,7 @@ export default class FilmCard {
       </p>
       <img src="${this._film.posterURL}" alt="" class="film-card__poster">
       <p class="film-card__description">${this._film.description}</p>
-      <a class="film-card__comments">${this._film.commentsCount} comments</a>
+      <a class="film-card__comments">${this._commentsCount} comments</a>
       <form class="film-card__controls">
         <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist ${(this._film.isOnWatchlist) ? `film-card__controls-item--active` : ``}">Add to watchlist</button>
         <button class="film-card__controls-item button film-card__controls-item--mark-as-watched ${(this._film.isWatched) ? `film-card__controls-item--active` : ``}">Mark as watched</button>

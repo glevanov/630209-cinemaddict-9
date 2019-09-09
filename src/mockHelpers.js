@@ -112,5 +112,5 @@ export const getRandomBoolean = () => Boolean(Math.round(Math.random()));
  */
 export const getComments = (id) => ({
   id,
-  comments: [...Array(getRandomInteger(1, 4))].map(getComment),
+  comments: [...Array(getRandomInteger(0, 4))].map(getComment),
 });

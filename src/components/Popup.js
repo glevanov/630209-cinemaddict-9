@@ -36,7 +36,7 @@ export default class Popup {
    * @return {string}
    */
   _getComments(comments) {
-    return comments.map((comment) => `
+    const commentElements = comments.map((comment) => `
     <li class="film-details__comment">
       <span class="film-details__comment-emoji">
         <img src="./images/emoji/${comment.emoji}.png" width="55" height="55" alt="emoji">
@@ -49,8 +49,13 @@ export default class Popup {
           <button class="film-details__comment-delete">Delete</button>
         </p>
       </div>
-    </li>`
-    ).join(``);
+    </li>
+    `);
+
+    return `
+    <ul class="film-details__comments-list">
+      ${commentElements.join(``)}
+    </ul>`;
   }
 
   /**
@@ -112,9 +117,9 @@ export default class Popup {
                 <tr class="film-details__row">
                   <td class="film-details__term">Genres</td>
                   <td class="film-details__cell">
-                    ${this._film.genres.map((item) => `
+                    ${Array.from(this._film.genres).map((item) => `
                       <span class="film-details__genre">${item}</span>
-                    `.join(``))}
+                    `).join(``)}
                   </td>
                 </tr>
               </table>
@@ -141,9 +146,7 @@ export default class Popup {
           <section class="film-details__comments-wrap">
             <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${this._comments.length}</span></h3>
     
-            <ul class="film-details__comments-list">
-              ${this._getComments(this._comments)}
-            </ul>
+            ${(this._comments.length) ? this._getComments(this._comments) : ``}
     
             <div class="film-details__new-comment">
               <div for="add-emoji" class="film-details__add-emoji-label"></div>
