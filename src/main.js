@@ -27,12 +27,6 @@ const MAX_FILMS_PER_RENDER = 5;
 const MAX_FILMS_PER_SECTION = 2;
 
 /**
- * Popup state flag
- * @type {boolean}
- */
-let hasOpenPopup = false;
-
-/**
  * Renders a film
  * @param {Node} target Film data
  * @param {object} film Film data
@@ -83,13 +77,12 @@ const renderScaffolding = () => {
 };
 
 const renderFilms = () => {
-  const mainContainer = filmsSection.getElement().querySelector(`.films-list__container`);
   const extraContainers = Array.from(filmsSection.getElement().querySelectorAll(`.films-list--extra .films-list__container`));
   const topRatedContainer = extraContainers[0];
   const mostCommentedContainer = extraContainers[1];
 
   films.slice(0, MAX_FILMS_PER_RENDER).forEach((film) => {
-    renderFilm(mainContainer, film);
+    renderFilm(mainFilmsContainer, film);
   });
   films.slice(0, MAX_FILMS_PER_SECTION).forEach((film) => {
     renderFilm(topRatedContainer, film);
@@ -97,6 +90,43 @@ const renderFilms = () => {
   films.slice(0, MAX_FILMS_PER_SECTION).forEach((film) => {
     renderFilm(mostCommentedContainer, film);
   });
+};
+
+/**
+ * Removes Show More button & handler
+ */
+const removeShowMore = () => {
+  showMore.getElement().removeEventListener(`click`, handleShowMoreClick);
+  removeElement(showMore.getElement());
+};
+
+/**
+ * Handles Show More button click
+ */
+const handleShowMoreClick = () => {
+  filmIndexCounter++;
+  const currentIndex = filmIndexCounter * MAX_FILMS_PER_RENDER;
+  const filmsToRender = films.slice(currentIndex, currentIndex + MAX_FILMS_PER_RENDER);
+
+  if (filmsToRender.length) {
+    if (filmsToRender.length < MAX_FILMS_PER_RENDER) {
+      removeShowMore();
+    }
+    filmsToRender.forEach((film) => {
+      renderFilm(mainFilmsContainer, film);
+    });
+  } else {
+    removeShowMore();
+  }
+};
+
+/**
+ * Adds Show More button event handlers
+ */
+const addShowMoreEventListener = () => {
+  if (showMore.getElement()) {
+    showMore.getElement().addEventListener(`click`, handleShowMoreClick);
+  }
 };
 
 const headerElement = document.querySelector(`.header`);
@@ -110,9 +140,24 @@ const filmsSection = new FilmsSection();
 const statistics = new Statistics({films});
 const showMore = new ShowMore();
 
+const mainFilmsContainer = filmsSection.getElement().querySelector(`.films-list__container`);
+
+/**
+ * Popup state flag
+ * @type {boolean}
+ */
+let hasOpenPopup = false;
+
+/**
+ * Counter for number of Show More button clicks
+ * @type {number}
+ */
+let filmIndexCounter = 0;
+
 renderScaffolding();
 renderFilms();
 
 if (films.length > MAX_FILMS_PER_RENDER) {
   render(mainElement.querySelector(`.films-list`), showMore.getElement());
+  addShowMoreEventListener();
 }
