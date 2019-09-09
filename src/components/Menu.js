@@ -1,41 +1,97 @@
 import countByID from '../countByID';
+import {createElement} from '../util';
 
 /**
- * Returns Sort element markup
- * @return {string}
+ * Menu component
+ * @class
  */
-export const getSort = () => {
-  const sortTypes = [
-    {
-      title: `Sort by default`,
-      isActive: true,
-    },
-    {
-      title: `Sort by date`,
-      isActive: false,
-    },
-    {
-      title: `Sort by rating`,
-      isActive: false,
-    },
-  ];
+export default class Menu {
+  constructor() {
+    this._element = null;
+    this._navigationData = {
+      all: {
+        title: `All movies`,
+        isActive: true,
+        isAdditional: false,
+      },
+      watchlist: {
+        title: `Watchlist`,
+        isActive: false,
+        isAdditional: false,
+      },
+      history: {
+        title: `History`,
+        isActive: false,
+        isAdditional: false,
+      },
+      favorites: {
+        title: `Favorites`,
+        isActive: false,
+        isAdditional: false,
+      },
+      stats: {
+        title: `Stats`,
+        isActive: false,
+        isAdditional: true,
+      },
+    };
+    this._sortTypes = [
+      {
+        title: `Sort by default`,
+        isActive: true,
+      },
+      {
+        title: `Sort by date`,
+        isActive: false,
+      },
+      {
+        title: `Sort by rating`,
+        isActive: false,
+      },
+    ];
+  }
 
-  const sortItems = sortTypes.map((item) => `
-    <li><a href="#" class="sort__button ${(item.isActive) ? `sort__button--active` : ``}">${item.title}</a></li>
-  `);
+  /**
+   * Returns component node
+   * @return {Node}
+   */
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+    return this._element;
+  }
 
-  return `
-  <ul class="sort">
-    ${sortItems.join(``)}
-  </ul>`;
-};
+  /** Removes link to element */
+  removeElement() {
+    this._element = null;
+  }
 
-/**
- * Returns Statistic element markup
- * @return {string}
- */
-const getStatistic = () => {
-  const navigationMarkup = getNavigationItems(navigationIDs).map((item) => `
+  /**
+   * Returns Sort element markup
+   * @return {string}
+   */
+  _getSort() {
+    const sortItems = this._sortTypes.map((item) => `
+      <li>
+        <a href="#" class="sort__button ${(item.isActive) ? `sort__button--active` : ``}">
+          ${item.title}
+        </a>
+      </li>
+    `);
+
+    return `
+    <ul class="sort">
+      ${sortItems.join(``)}
+    </ul>`;
+  }
+
+  /**
+   * Returns Statistic element markup
+   * @return {string}
+   */
+  _getStatistic() {
+    const navigationMarkup = this._getNavigationItems(this._getNavigationIDs).map((item) => `
     <a
       href="#${item.id}"
       class="main-navigation__item ${(item.isActive) ? `main-navigation__item--active` : ``} ${(item.isAdditional) ? `main-navigation__item--additional` : ``}"
@@ -44,80 +100,60 @@ const getStatistic = () => {
     </a>
   `);
 
-  return `
-  <nav class="main-navigation">
-    ${navigationMarkup.join(``)}
-  </nav>`;
-};
-
-/**
- * Returns Menu element markup
- * @return {string}
- */
-export const getMenu = () => `
-  ${getStatistic()}
-  ${getSort()}
-`;
-
-/**
- * Returns a navigation item
- * @param {string} id
- * @return {object}
- */
-const getNavigationItem = (id) => {
-  const item = {
-    id,
-    title: navigationData[id].title,
-    isActive: navigationData[id].isActive,
-    isAdditional: navigationData[id].isAdditional,
-  };
-  const counter = countByID(id);
-  if (counter) {
-    item.counter = counter;
+    return `
+    <nav class="main-navigation">
+      ${navigationMarkup.join(``)}
+    </nav>`;
   }
-  return item;
-};
 
-/**
- * Transforms navigation data to navigation items array
- * @param {array} IDs
- * @return {array}
- */
-const getNavigationItems = (IDs) => {
-  if (!IDs.length) {
-    return [];
+  /**
+   * Returns a navigation item
+   * @param {string} id
+   * @return {object}
+   */
+  _getNavigationItem(id) {
+    const item = {
+      id,
+      title: this._navigationData[id].title,
+      isActive: this._navigationData[id].isActive,
+      isAdditional: this._navigationData[id].isAdditional,
+    };
+    const counter = countByID(id);
+    if (counter) {
+      item.counter = counter;
+    }
+    return item;
   }
-  let acc = [];
-  IDs.forEach((id) => acc.push(getNavigationItem(id)));
-  return acc;
-};
 
-const navigationData = {
-  all: {
-    title: `All movies`,
-    isActive: true,
-    isAdditional: false,
-  },
-  watchlist: {
-    title: `Watchlist`,
-    isActive: false,
-    isAdditional: false,
-  },
-  history: {
-    title: `History`,
-    isActive: false,
-    isAdditional: false,
-  },
-  favorites: {
-    title: `Favorites`,
-    isActive: false,
-    isAdditional: false,
-  },
-  stats: {
-    title: `Stats`,
-    isActive: false,
-    isAdditional: true,
-  },
-};
+  /**
+   * Transforms navigation data to navigation items array
+   * @param {array} IDs
+   * @return {array}
+   */
+  _getNavigationItems(IDs) {
+    if (!IDs.length) {
+      return [];
+    }
+    let acc = [];
+    IDs.forEach((id) => acc.push(this._getNavigationItem(id)));
+    return acc;
+  }
 
-const navigationIDs = Object.keys(navigationData);
+  /**
+   * Returns component markup
+   * @return {array}
+   */
+  _getNavigationIDs() {
+    return Object.keys(this._navigationData);
+  }
+
+  /**
+   * Returns component markup
+   * @return {string}
+   */
+  getTemplate() {
+    return `
+    ${this._getStatistic()}
+    ${this._getSort()}`;
+  }
+}
