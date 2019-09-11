@@ -1,13 +1,13 @@
+import AbstractComponent from './AbstractComponent';
 import countByID from '../countByID';
-import {createElement} from '../util';
 
 /**
  * Menu component
  * @class
  */
-export default class Menu {
+export default class Menu extends AbstractComponent {
   constructor() {
-    this._element = null;
+    super();
     this._navigationData = {
       all: {
         title: `All movies`,
@@ -49,22 +49,6 @@ export default class Menu {
         isActive: false,
       },
     ];
-  }
-
-  /**
-   * Returns component node
-   * @return {Node}
-   */
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  /** Removes link to element */
-  removeElement() {
-    this._element = null;
   }
 
   /**

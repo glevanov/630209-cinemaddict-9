@@ -1,33 +1,18 @@
-import {createElement} from '../util';
+import AbstractComponent from './AbstractComponent';
 
 /**
  * Films Section component
  * @class
  */
-export default class FilmsSection {
+export default class FilmsSection extends AbstractComponent {
   constructor() {
-    this._element = null;
+    super();
     this._SectionsTitles = {
       TOP_RATED: `Top rated`,
       MOST_COMMENTED: `Most commented`
     };
   }
 
-  /**
-   * Returns component node
-   * @return {Node}
-   */
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  /** Removes link to element */
-  removeElement() {
-    this._element = null;
-  }
   /**
    * Returns Films section markup
    * @return {string}

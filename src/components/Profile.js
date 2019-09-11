@@ -1,32 +1,16 @@
-import {createElement} from '../util';
+import AbstractComponent from './AbstractComponent';
 
 /**
  * Profile component
  * @class
  */
-export default class Profile {
+export default class Profile extends AbstractComponent {
   /**
    * @param {object} props
    */
   constructor(props) {
-    this._element = null;
+    super();
     this._watchedFilmsCount = props.watchedFilmsCount;
-  }
-
-  /**
-   * Returns component node
-   * @return {Node}
-   */
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  /** Removes link to element */
-  removeElement() {
-    this._element = null;
   }
 
   /**
