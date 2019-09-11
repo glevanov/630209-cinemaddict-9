@@ -1,28 +1,12 @@
-import {createElement} from '../util';
+import AbstractComponent from './AbstractComponent';
 
 /**
  * Search component
  * @class
  */
-export default class Search {
+export default class Search extends AbstractComponent {
   constructor() {
-    this._element = null;
-  }
-
-  /**
-   * Returns component node
-   * @return {Node}
-   */
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  /** Removes link to element */
-  removeElement() {
-    this._element = null;
+    super();
   }
 
   /**

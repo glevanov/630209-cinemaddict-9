@@ -1,33 +1,17 @@
-import {createElement} from '../util';
+import AbstractComponent from './AbstractComponent';
 
 /**
  * Popup component
  * @class
  */
-export default class Popup {
+export default class Popup extends AbstractComponent {
   /**
    * @param {object} props
    */
   constructor(props) {
+    super();
     this._film = props.film;
     this._comments = props.comments;
-    this._element = null;
-  }
-
-  /**
-   * Returns component node
-   * @return {Node}
-   */
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  /** Removes link to element */
-  removeElement() {
-    this._element = null;
   }
 
   /**

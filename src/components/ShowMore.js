@@ -1,28 +1,12 @@
-import {createElement} from '../util';
+import AbstractComponent from './AbstractComponent';
 
 /**
  * ShowMore component
  * @class
  */
-export default class ShowMore {
+export default class ShowMore extends AbstractComponent {
   constructor() {
-    this._element = null;
-  }
-
-  /**
-   * Returns component node
-   * @return {Node}
-   */
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  /** Removes link to element */
-  removeElement() {
-    this._element = null;
+    super();
   }
 
   /**

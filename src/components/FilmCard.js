@@ -1,33 +1,17 @@
-import {createElement} from '../util';
+import AbstractComponent from './AbstractComponent';
 
 /**
  * Film Card component
  * @class
  */
-export default class FilmCard {
+export default class FilmCard extends AbstractComponent {
   /**
    * @param {object} props
    */
   constructor(props) {
+    super();
     this._film = props.film;
-    this._commentsCount = props._commentsCount;
-    this._element = null;
-  }
-
-  /**
-   * Returns component node
-   * @return {Node}
-   */
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  /** Removes link to element */
-  removeElement() {
-    this._element = null;
+    this._commentsCount = props.commentsCount;
   }
 
   /**

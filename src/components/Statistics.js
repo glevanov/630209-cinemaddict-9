@@ -1,32 +1,16 @@
-import {createElement} from '../util';
+import AbstractComponent from './AbstractComponent';
 
 /**
  * Statistics component
  * @class
  */
-export default class Statistics {
+export default class Statistics extends AbstractComponent {
   /**
    * @param {object} props
    */
   constructor(props) {
-    this._element = null;
+    super();
     this._films = props.films;
-  }
-
-  /**
-   * Returns component node
-   * @return {Node}
-   */
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  /** Removes link to element */
-  removeElement() {
-    this._element = null;
   }
 
   /**
