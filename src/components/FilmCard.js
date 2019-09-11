@@ -11,7 +11,7 @@ export default class FilmCard extends AbstractComponent {
   constructor(props) {
     super();
     this._film = props.film;
-    this._commentsCount = props._commentsCount;
+    this._commentsCount = props.commentsCount;
   }
 
   /**
