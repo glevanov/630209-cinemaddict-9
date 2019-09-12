@@ -75,7 +75,7 @@ export default class Menu extends AbstractComponent {
    * @return {string}
    */
   _getStatistic() {
-    const navigationMarkup = this._getNavigationItems(this._getNavigationIDs).map((item) => `
+    const navigationMarkup = this._getNavigationItems(this._getNavigationIDs()).map((item) => `
     <a
       href="#${item.id}"
       class="main-navigation__item ${(item.isActive) ? `main-navigation__item--active` : ``} ${(item.isAdditional) ? `main-navigation__item--additional` : ``}"
