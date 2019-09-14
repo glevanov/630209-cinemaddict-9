@@ -42,3 +42,13 @@ export const render = (container, element, place = Position.BEFOREEND) => {
       break;
   }
 };
+
+/**
+ * Removes all children nodes from element
+ * @param {Node} element Target node
+ */
+export const clearChildNodes = (element) => {
+  while (element.hasChildNodes()) {
+    element.removeChild(element.lastChild);
+  }
+};

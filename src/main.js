@@ -4,7 +4,7 @@ import Profile from './components/Profile';
 import Statistics from './components/Statistics';
 import countByID from './countByID';
 import {films, comments} from './data';
-import PageController from "./components/PageController";
+import PageController from './controllers/PageController';
 
 const PROFILE_COUNT_ID = `history`;
 
